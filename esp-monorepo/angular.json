@@ -1,0 +1,141 @@
+{
+  "version": 1,
+  "projects": {
+    "esp-tahoe": {
+      "projectType": "application",
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "apps/esp-tahoe",
+      "sourceRoot": "apps/esp-tahoe/src",
+      "prefix": "esp-monorepo",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/esp-tahoe",
+            "index": "apps/esp-tahoe/src/index.html",
+            "main": "apps/esp-tahoe/src/main.ts",
+            "polyfills": "apps/esp-tahoe/src/polyfills.ts",
+            "tsConfig": "apps/esp-tahoe/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "apps/esp-tahoe/src/favicon.ico",
+              "apps/esp-tahoe/src/assets"
+            ],
+            "styles": ["apps/esp-tahoe/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/esp-tahoe/src/environments/environment.ts",
+                  "with": "apps/esp-tahoe/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "esp-tahoe:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "esp-tahoe:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "esp-tahoe:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/esp-tahoe/tsconfig.app.json",
+              "apps/esp-tahoe/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/esp-tahoe/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/esp-tahoe/jest.config.js",
+            "tsConfig": "apps/esp-tahoe/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "apps/esp-tahoe/src/test-setup.ts"
+          }
+        }
+      }
+    },
+    "esp-tahoe-e2e": {
+      "root": "apps/esp-tahoe-e2e",
+      "sourceRoot": "apps/esp-tahoe-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/esp-tahoe-e2e/cypress.json",
+            "tsConfig": "apps/esp-tahoe-e2e/tsconfig.e2e.json",
+            "devServerTarget": "esp-tahoe:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "esp-tahoe:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["apps/esp-tahoe-e2e/tsconfig.e2e.json"],
+            "exclude": ["**/node_modules/**", "!apps/esp-tahoe-e2e/**/*"]
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/angular"
+  },
+  "schematics": {
+    "@nrwl/angular:application": {
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "unitTestRunner": "jest"
+    }
+  },
+  "defaultProject": "esp-tahoe"
+}
