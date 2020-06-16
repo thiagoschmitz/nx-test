@@ -8,6 +8,8 @@
     "nx": "nx",
     "start": "ng serve",
     "build": "ng build",
+    "build-tahoe:prod": "ng build esp-tahoe --prod",
+    "build-settings:prod": "ng build esp-settings --prod",
     "test": "ng test",
     "lint": "nx workspace-lint && ng lint",
     "e2e": "ng e2e",
