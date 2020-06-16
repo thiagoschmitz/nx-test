@@ -242,6 +242,127 @@
           "style": "scss"
         }
       }
+    },
+    "lib-tahoe": {
+      "projectType": "library",
+      "root": "libs/lib-tahoe",
+      "sourceRoot": "libs/lib-tahoe/src",
+      "prefix": "esp-monorepo",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["libs/lib-tahoe/tsconfig.lib.json"],
+            "exclude": ["**/node_modules/**", "!libs/lib-tahoe/**/*"]
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      }
+    },
+    "esp": {
+      "projectType": "application",
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "apps/esp",
+      "sourceRoot": "apps/esp/src",
+      "prefix": "esp-monorepo",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/esp",
+            "index": "apps/esp/src/index.html",
+            "main": "apps/esp/src/main.ts",
+            "polyfills": "apps/esp/src/polyfills.ts",
+            "tsConfig": "apps/esp/tsconfig.app.json",
+            "aot": true,
+            "assets": ["apps/esp/src/favicon.ico", "apps/esp/src/assets"],
+            "styles": ["apps/esp/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/esp/src/environments/environment.ts",
+                  "with": "apps/esp/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "esp:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "esp:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "esp:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["apps/esp/tsconfig.app.json"],
+            "exclude": ["**/node_modules/**", "!apps/esp/**/*"]
+          }
+        }
+      }
+    },
+    "lib-settings": {
+      "projectType": "library",
+      "root": "libs/lib-settings",
+      "sourceRoot": "libs/lib-settings/src",
+      "prefix": "esp-monorepo",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["libs/lib-settings/tsconfig.lib.json"],
+            "exclude": ["**/node_modules/**", "!libs/lib-settings/**/*"]
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      }
     }
   },
   "cli": {

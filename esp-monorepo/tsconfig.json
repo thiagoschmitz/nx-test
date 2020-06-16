@@ -16,7 +16,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@esp-monorepo/header": ["libs/header/src/index.ts"]
+      "@esp-monorepo/header": ["libs/header/src/index.ts"],
+      "@esp-monorepo/lib-tahoe": ["libs/lib-tahoe/src/index.ts"],
+      "@esp-monorepo/lib-settings": ["libs/lib-settings/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
