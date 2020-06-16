@@ -25,6 +25,12 @@
     "esp-tahoe-e2e": {
       "tags": [],
       "implicitDependencies": ["esp-tahoe"]
+    },
+    "esp-settings": {
+      "tags": []
+    },
+    "header": {
+      "tags": []
     }
   }
 }

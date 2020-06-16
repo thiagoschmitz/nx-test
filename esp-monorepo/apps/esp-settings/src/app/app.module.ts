@@ -1,12 +1,17 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HeaderModule } from '@esp-monorepo/header';
 
 import { AppComponent } from './app.component';
+import { RouterModule } from '@angular/router';
+import { HeaderModule } from '@esp-monorepo/header';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, HeaderModule],
+  imports: [
+    BrowserModule,
+    RouterModule.forRoot([], { initialNavigation: 'enabled' }),
+    HeaderModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })
